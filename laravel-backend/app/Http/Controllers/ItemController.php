@@ -28,7 +28,6 @@ class ItemController extends Controller
             'satuan' => 'nullable|string|max:50',
             'stok' => 'nullable|integer',
             'harga' => 'nullable|numeric',
-            'deskripsi' => 'nullable|string',
         ]);
 
         // pastikan default untuk beberapa field bila tidak diisi
@@ -37,7 +36,8 @@ class ItemController extends Controller
             'stok' => $validated['stok'] ?? 0,
         ], $validated);
 
-        $item = Item::create(attributes: $validated);
+        // perbaikan: jangan pakai named argument, pakai array langsung
+        $item = Item::create($validated);
 
         return response()->json([
             'message' => 'Data item berhasil ditambahkan',
@@ -78,7 +78,6 @@ class ItemController extends Controller
             'satuan' => 'nullable|string|max:50',
             'stok' => 'nullable|integer',
             'harga' => 'nullable|numeric',
-            'deskripsi' => 'nullable|string',
         ]);
 
         $item->update($validated);

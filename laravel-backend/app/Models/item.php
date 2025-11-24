@@ -18,4 +18,9 @@ class Item extends Model
         'stok',
         'harga',
     ];
+
+    protected $casts = [
+        'stok' => 'integer',
+        'harga' => 'decimal:2',
+    ];
 }
